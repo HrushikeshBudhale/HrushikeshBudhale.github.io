@@ -7,5 +7,6 @@ This repository holds the source files used to generate
 [my profile](https://hrushikeshbudhale.github.io/) github page.
 <p>
 Feel free to use this as a template to build your own or to share it with others.
+  
 Leave it a star if you find it useful. ⭐️
 </p>
