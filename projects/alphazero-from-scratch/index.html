@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171816" />
+    <title>AlphaZero from Scratch — Hrushikesh Budhale</title>
+    <meta name="description" content="A concise AlphaZero and Monte Carlo Tree Search implementation for learning through Tic-Tac-Toe and Connect Four experiments." />
+    <link rel="canonical" href="https://hrushikeshbudhale.github.io/projects/alphazero-from-scratch/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hrushikeshbudhale.github.io/projects/alphazero-from-scratch/" />
+    <meta property="og:title" content="AlphaZero from Scratch" />
+    <meta property="og:description" content="Learning AlphaZero and Monte Carlo Tree Search through small, configurable board games." />
+    <meta property="og:image" content="https://hrushikeshbudhale.github.io/images/thumbs/connect4_thumbnail.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
+    <script>
+      (() => { let theme = 'dark'; try { theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); } catch (_) {} document.documentElement.dataset.theme = theme; })();
+    </script>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/project.css" />
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#project">Skip to project</a>
+    <div class="case-shell">
+      <nav class="case-nav" aria-label="Project navigation"><a class="case-nav-home" href="../../#work">← Hrushikesh Budhale</a><div class="case-nav-actions"><a href="../../#work">All projects</a><button class="case-theme-toggle theme-toggle" type="button" aria-label="Switch theme"><span class="fas fa-sun theme-icon-light" aria-hidden="true"></span><span class="fas fa-moon theme-icon-dark" aria-hidden="true"></span></button></div></nav>
+      <main class="case-article" id="project">
+        <header class="case-hero"><p class="case-kicker">Reinforcement learning · From scratch</p><h1>AlphaZero from Scratch</h1><p class="case-deck">A concise implementation of AlphaZero and Monte Carlo Tree Search for learning, experimenting, and comparing agents in Tic-Tac-Toe and Connect Four.</p><div class="case-tags"><span>PyTorch</span><span>AlphaZero</span><span>MCTS</span><span>Self-play</span></div></header>
+        <figure class="case-figure"><img src="../../images/thumbs/connect4_thumbnail.png" alt="Connect Four board representing an AlphaZero experiment" width="836" height="714" /><figcaption>Connect Four provides a compact environment for studying search and learned policies.</figcaption></figure>
+        <section class="case-content"><h2>The goal</h2><div class="case-copy"><p>AlphaZero combines planning with a learned policy and value model, but understanding the interaction between those pieces can be difficult in a large environment. This project reduces the algorithm to a small, readable system built around familiar board games.</p></div></section>
+        <section class="case-content"><h2>Experiment design</h2><div class="case-copy"><p>The framework makes it easy to choose a game, configure two agents, and run a repeatable tournament.</p><ul><li>Play as or compare random, human, MCTS, and AlphaZero agents.</li><li>Switch between Tic-Tac-Toe and Connect Four.</li><li>Configure self-play training separately from evaluation.</li><li>Inspect individual games or aggregate wins and draws across a tournament.</li></ul></div></section>
+        <section class="case-content"><h2>Result</h2><div class="case-copy"><p>In the repository’s documented Connect Four evaluation, the trained AlphaZero agent wins all ten rounds against the configured MCTS agent. More importantly, the compact setup makes the full loop—from search and self-play to training and evaluation—easy to trace and modify.</p></div></section>
+        <div class="case-cta"><a class="case-button" href="https://github.com/HrushikeshBudhale/Alpha_Zero" target="_blank" rel="noreferrer">Explore the code <span>↗</span></a><a class="case-button secondary" href="../home-organizing-robot/">Next project →</a></div>
+      </main>
+      <footer class="case-footer"><span>© <span data-year>2026</span> Hrushikesh Budhale</span><a href="../../#contact">Start a conversation →</a></footer>
+    </div>
+    <script>document.querySelector('[data-year]').textContent = new Date().getFullYear(); document.querySelector('.case-theme-toggle').addEventListener('click', () => { const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'; document.documentElement.dataset.theme = next; try { localStorage.setItem('theme', next); } catch (_) {} });</script>
+  </body>
+</html>

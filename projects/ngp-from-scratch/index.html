@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171816" />
+    <title>Instant NGP from Scratch in PyTorch — Hrushikesh Budhale</title>
+    <meta name="description" content="A readable PyTorch implementation of Instant Neural Graphics Primitives for 2D images and 3D neural scene reconstruction." />
+    <link rel="canonical" href="https://hrushikeshbudhale.github.io/projects/ngp-from-scratch/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hrushikeshbudhale.github.io/projects/ngp-from-scratch/" />
+    <meta property="og:title" content="Instant NGP from Scratch in PyTorch" />
+    <meta property="og:description" content="A compact, readable implementation for learning multiresolution hash encoding and accelerated neural rendering." />
+    <meta property="og:image" content="https://hrushikeshbudhale.github.io/images/thumbs/ngp_from_scratch.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
+    <script>
+      (() => { let theme = 'dark'; try { theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); } catch (_) {} document.documentElement.dataset.theme = theme; })();
+    </script>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/project.css" />
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#project">Skip to project</a>
+    <div class="case-shell">
+      <nav class="case-nav" aria-label="Project navigation"><a class="case-nav-home" href="../../#work">← Hrushikesh Budhale</a><div class="case-nav-actions"><a href="../../#work">All projects</a><button class="case-theme-toggle theme-toggle" type="button" aria-label="Switch theme"><span class="fas fa-sun theme-icon-light" aria-hidden="true"></span><span class="fas fa-moon theme-icon-dark" aria-hidden="true"></span></button></div></nav>
+      <main class="case-article" id="project">
+        <header class="case-hero">
+          <p class="case-kicker">Computer vision · From scratch</p>
+          <h1>Instant NGP from Scratch</h1>
+          <p class="case-deck">A deliberately compact PyTorch implementation of Instant Neural Graphics Primitives, written to make the core ideas behind fast neural reconstruction easier to understand.</p>
+          <div class="case-tags"><span>PyTorch</span><span>Hash encoding</span><span>Ray marching</span><span>NeRF</span></div>
+        </header>
+        <figure class="case-figure"><img src="../../images/thumbs/ngp_from_scratch.png" alt="Instant NGP reconstruction result" width="1104" height="882" /><figcaption>A learned reconstruction produced by the simplified Instant NGP pipeline.</figcaption></figure>
+        <section class="case-content"><h2>The goal</h2><div class="case-copy"><p>Production implementations of neural graphics primitives are fast, but their optimizations can obscure the underlying algorithm. I built this version for people who learn best by reading code, keeping the training and rendering path small and annotating tensor shapes throughout.</p></div></section>
+        <section class="case-content"><h2>What is inside</h2><div class="case-copy"><p>The implementation covers the essential pieces of Instant NGP while remaining close to a conventional NeRF pipeline.</p><ul><li>Multiresolution hash encoding for compact spatial features.</li><li>Accelerated ray marching with early stopping.</li><li>Both 2D image fitting and 3D scene reconstruction through one configurable dimensionality value.</li><li>A familiar PyTorch training loop designed for experimentation.</li></ul></div></section>
+        <section class="case-content"><h2>Result</h2><div class="case-copy"><p>The same code path can reconstruct a two-dimensional image or a three-dimensional scene by changing the configured dimensionality. In the documented 2D experiment, the model reaches a PSNR of 26.12 while preserving a readable implementation that is easy to modify.</p></div></section>
+        <div class="case-cta"><a class="case-button" href="https://github.com/HrushikeshBudhale/NGP_from_scratch" target="_blank" rel="noreferrer">Explore the code <span>↗</span></a><a class="case-button secondary" href="../alphazero-from-scratch/">Next project →</a></div>
+      </main>
+      <footer class="case-footer"><span>© <span data-year>2026</span> Hrushikesh Budhale</span><a href="../../#contact">Start a conversation →</a></footer>
+    </div>
+    <script>document.querySelector('[data-year]').textContent = new Date().getFullYear(); document.querySelector('.case-theme-toggle').addEventListener('click', () => { const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'; document.documentElement.dataset.theme = next; try { localStorage.setItem('theme', next); } catch (_) {} });</script>
+  </body>
+</html>

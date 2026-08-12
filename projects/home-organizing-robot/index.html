@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171816" />
+    <title>Home Organizing Robot — Hrushikesh Budhale</title>
+    <meta name="description" content="A ROS mobile-manipulation project that navigates a home, detects a misplaced object, grasps it, and returns it to a desired location." />
+    <link rel="canonical" href="https://hrushikeshbudhale.github.io/projects/home-organizing-robot/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hrushikeshbudhale.github.io/projects/home-organizing-robot/" />
+    <meta property="og:title" content="Home Organizing Robot" />
+    <meta property="og:description" content="An end-to-end ROS navigation, perception, and manipulation task in a simulated home." />
+    <meta property="og:image" content="https://hrushikeshbudhale.github.io/images/thumbs/home_organizing_robot.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
+    <script>
+      (() => { let theme = 'dark'; try { theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); } catch (_) {} document.documentElement.dataset.theme = theme; })();
+    </script>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/project.css" />
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#project">Skip to project</a>
+    <div class="case-shell">
+      <nav class="case-nav" aria-label="Project navigation"><a class="case-nav-home" href="../../#work">← Hrushikesh Budhale</a><div class="case-nav-actions"><a href="../../#work">All projects</a><button class="case-theme-toggle theme-toggle" type="button" aria-label="Switch theme"><span class="fas fa-sun theme-icon-light" aria-hidden="true"></span><span class="fas fa-moon theme-icon-dark" aria-hidden="true"></span></button></div></nav>
+      <main class="case-article" id="project">
+        <header class="case-hero"><p class="case-kicker">Robotics · Mobile manipulation</p><h1>Home Organizing Robot</h1><p class="case-deck">An end-to-end ROS project in which a mobile manipulator searches a simulated home, detects a misplaced object, grasps it, and returns it to the right location.</p><div class="case-tags"><span>ROS</span><span>MoveIt</span><span>OpenCV</span><span>Gazebo</span><span>C++</span></div></header>
+        <figure class="case-figure"><img src="../../images/thumbs/home_organizing_robot.png" alt="TIAGo mobile manipulator organizing an object in a simulated home" width="1198" height="682" /><figcaption>The TIAGo robot combines navigation, perception, and manipulation in a five-room Gazebo environment.</figcaption></figure>
+        <section class="case-content"><h2>The task</h2><div class="case-copy"><p>A blue cube is placed at a random location inside a simulated five-room house. The robot must search for it autonomously, approach it, plan a valid grasp, and carry it to a designated destination.</p></div></section>
+        <section class="case-content"><h2>The system</h2><div class="case-copy"><p>A state-machine pipeline coordinates several standard robotics components into one complete behavior.</p><ul><li>ROS move_base navigates through the mapped environment.</li><li>OpenCV filtering detects the blue target while the robot searches.</li><li>MoveIt plans the manipulator trajectory used to grasp the object.</li><li>The mobile base returns the grasped object to its desired location.</li></ul></div></section>
+        <section class="case-content"><h2>Engineering focus</h2><div class="case-copy"><p>This was a team project designed to practice both core ROS concepts and disciplined robotics software development. Alongside the demo, the repository includes automated tests, continuous-integration configuration, generated documentation, planning artifacts, and system diagrams. It also records a practical edge case: manipulation planning becomes unreliable when an object is too close to a wall.</p></div></section>
+        <div class="case-cta"><a class="case-button" href="https://github.com/HrushikeshBudhale/decluttering_domestic_robot" target="_blank" rel="noreferrer">Explore the code <span>↗</span></a><a class="case-button secondary" href="../fun-with-nerf/">First project →</a></div>
+      </main>
+      <footer class="case-footer"><span>© <span data-year>2026</span> Hrushikesh Budhale</span><a href="../../#contact">Start a conversation →</a></footer>
+    </div>
+    <script>document.querySelector('[data-year]').textContent = new Date().getFullYear(); document.querySelector('.case-theme-toggle').addEventListener('click', () => { const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'; document.documentElement.dataset.theme = next; try { localStorage.setItem('theme', next); } catch (_) {} });</script>
+  </body>
+</html>

@@ -200,7 +200,7 @@ button, input, textarea { font: inherit; }
 :root[data-theme='light'] .theme-icon-light { opacity: 0; transform: rotate(30deg) scale(.65); }
 :root[data-theme='light'] .theme-icon-dark { opacity: 1; transform: rotate(0) scale(1); }
 
-@media (min-width: 821px) {
+@media (min-width: 621px) {
   .site-nav {
     position: absolute;
     top: 0;
