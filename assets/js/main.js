@@ -1,158 +1,76 @@
-(function($) {
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealItems = document.querySelectorAll('.reveal');
+const navLinks = [...document.querySelectorAll('.nav-links a')];
+const sections = [...document.querySelectorAll('[data-section]')];
+const toTop = document.querySelector('.to-top');
+const themeToggle = document.querySelector('.theme-toggle');
+const themeColor = document.querySelector('meta[name="theme-color"]');
+const profileCard = document.querySelector('.profile-card');
+const profileToggle = document.querySelector('.profile-toggle');
 
-	var $window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$footer = $('#footer'),
-		$main = $('#main'),
-		settings = {
+const setTheme = (theme, persist = false) => {
+  document.documentElement.dataset.theme = theme;
+  const isLight = theme === 'light';
+  const nextTheme = isLight ? 'dark' : 'light';
+  themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+  themeToggle.setAttribute('title', `Switch to ${nextTheme} theme`);
+  themeToggle.setAttribute('aria-pressed', String(isLight));
+  themeColor.setAttribute('content', isLight ? '#f5f3ed' : '#171816');
 
-			// Parallax background effect?
-				parallax: true,
-
-			// Parallax factor (lower = more intense, higher = less intense).
-				parallaxFactor: 20
-
-		};
-
-	// Breakpoints.
-		breakpoints({
-			xlarge:  [ '1281px',  '1800px' ],
-			large:   [ '981px',   '1280px' ],
-			medium:  [ '737px',   '980px'  ],
-			small:   [ '481px',   '736px'  ],
-			xsmall:  [ null,      '480px'  ],
-		});
-
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
-
-	// Touch?
-		if (browser.mobile) {
-
-			// Turn on touch mode.
-				$body.addClass('is-touch');
-
-			// Height fix (mostly for iOS).
-				window.setTimeout(function() {
-					$window.scrollTop($window.scrollTop() + 1);
-				}, 0);
-
-		}
-
-	// Footer.
-		breakpoints.on('<=medium', function() {
-			$footer.insertAfter($main);
-		});
-
-		breakpoints.on('>medium', function() {
-			$footer.appendTo($header);
-		});
-
-	// Header.
-
-		// Parallax background.
-
-			// Disable parallax on IE (smooth scrolling is jerky), and on mobile platforms (= better performance).
-				if (browser.name == 'ie'
-				||	browser.mobile)
-					settings.parallax = false;
-
-			if (settings.parallax) {
-
-				breakpoints.on('<=medium', function() {
-
-					$window.off('scroll.strata_parallax');
-					$header.css('background-position', '');
-
-				});
-
-				breakpoints.on('>medium', function() {
-
-					$header.css('background-position', 'left 0px');
-
-					$window.on('scroll.strata_parallax', function() {
-						$header.css('background-position', 'left ' + (-1 * (parseInt($window.scrollTop()) / settings.parallaxFactor)) + 'px');
-					});
-
-				});
-
-				$window.on('load', function() {
-					$window.triggerHandler('scroll');
-				});
-
-			}
-
-	// Main Sections: Two.
-
-		// Lightbox gallery.
-			$window.on('load', function() {
-
-				$('#two').poptrox({
-					caption: function($a) { return $a.next('h3').text(); },
-					overlayColor: '#2c2c2c',
-					overlayOpacity: 0.85,
-					popupCloserText: '',
-					popupLoaderText: '',
-					selector: '.work-item a.image',
-					usePopupCaption: true,
-					usePopupDefaultStyling: false,
-					usePopupEasyClose: false,
-					usePopupNav: true,
-					windowMargin: (breakpoints.active('<=small') ? 0 : 50)
-				});
-
-			});
-
-})(jQuery);
-
-// Get all sections that have an ID defined
-const sections = document.querySelectorAll("section[id]");
-
-// Add an event listener listening for scroll
-window.addEventListener("scroll", navHighlighter);
-
-function navHighlighter() {
-  
-	// Get current scroll position
-	let scrollY = window.pageYOffset;
-	
-	// Now we loop through sections to get height, top and ID values for each
-	sections.forEach(current => {
-	  const sectionHeight = current.offsetHeight;
-	
-	  const sectionTop = (current.getBoundingClientRect().top + window.pageYOffset) - 350;
-	  sectionId = current.getAttribute("id");
-	  
-	  /*
-	  - If our current scroll position enters the space where current section on screen is, add .active class to corresponding navigation link, else remove it
-	  - To know which link needs an active class, we use sectionId variable we are getting while looping through sections as an selector
-	  */
-	  if (
-		scrollY > sectionTop &&
-		scrollY <= sectionTop + sectionHeight
-	  ){
-		document.querySelector(".navigation a[href*=" + sectionId + "]").classList.add("active");
-	  } else {
-		document.querySelector(".navigation a[href*=" + sectionId + "]").classList.remove("active");
-	  }
-	});
+  if (persist) {
+    try { localStorage.setItem('theme', theme); } catch (_) {}
   }
+};
 
-//Get the button:
-scroll_up_button = document.getElementById("scrollUpBtn");
+setTheme(document.documentElement.dataset.theme || 'dark');
+themeToggle.addEventListener('click', () => {
+  setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light', true);
+});
 
-// When the user scrolls down 450px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+profileToggle.addEventListener('click', () => {
+  const expanded = profileCard.classList.toggle('profile-expanded');
+  profileToggle.setAttribute('aria-expanded', String(expanded));
+  profileToggle.setAttribute('aria-label', expanded ? 'Collapse profile details' : 'Expand profile details');
+});
 
-function scrollFunction() {
-  if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
-    scroll_up_button.style.display = "block";
-  } else {
-    scroll_up_button.style.display = "none";
-  }
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  revealItems.forEach((item) => item.classList.add('in-view'));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.09, rootMargin: '0px 0px -40px' });
+
+  revealItems.forEach((item, index) => {
+    item.style.transitionDelay = `${Math.min(index % 3, 2) * 70}ms`;
+    revealObserver.observe(item);
+  });
 }
+
+const setActiveSection = () => {
+  const marker = window.scrollY + Math.min(window.innerHeight * 0.34, 260);
+  let activeId = sections[0]?.id;
+
+  sections.forEach((section) => {
+    if (section.offsetTop <= marker) activeId = section.id;
+  });
+
+  navLinks.forEach((link) => {
+    link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
+  });
+
+  toTop.classList.toggle('visible', window.scrollY > 700);
+};
+
+window.addEventListener('scroll', setActiveSection, { passive: true });
+window.addEventListener('resize', setActiveSection, { passive: true });
+setActiveSection();
+
+toTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
