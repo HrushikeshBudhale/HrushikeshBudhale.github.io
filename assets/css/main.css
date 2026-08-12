@@ -92,14 +92,23 @@ button, input, textarea { font: inherit; }
   top: 12px;
   left: 12px;
   z-index: 100;
+  max-width: calc(100vw - 24px);
   padding: 10px 16px;
+  overflow: hidden;
   color: var(--on-accent);
   background: var(--lime);
   border-radius: 99px;
-  transform: translateY(-150%);
-  transition: transform .2s ease;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity .15s ease;
 }
-.skip-link:focus { transform: translateY(0); }
+.skip-link:focus {
+  clip-path: inset(0);
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .site-shell {
   width: min(1180px, calc(100% - 48px));
@@ -191,8 +200,11 @@ button, input, textarea { font: inherit; }
 .nav-links { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); }
 .nav-links a { position: relative; padding: 26px 0 24px; color: var(--muted); font-size: 13px; font-weight: 600; transition: color .2s ease; }
 .nav-links a::after { content: ''; position: absolute; height: 1px; left: 0; right: 100%; bottom: -1px; background: var(--accent); transition: right .25s ease; }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
 .nav-links a.active::after { right: 0; }
+@media (hover: hover) {
+  .nav-links a:hover { color: var(--ink); }
+}
 .theme-toggle { width: 34px; height: 34px; display: grid; place-items: center; padding: 0; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
 .theme-toggle:hover { color: var(--ink); background: var(--hover-wash); border-color: var(--profile-label); }
 .theme-toggle span { grid-area: 1 / 1; font-size: 14px; transition: opacity .2s ease, transform .25s ease; }

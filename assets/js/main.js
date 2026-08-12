@@ -51,11 +51,11 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 }
 
 const setActiveSection = () => {
-  const marker = window.scrollY + Math.min(window.innerHeight * 0.34, 260);
+  const marker = Math.min(window.innerHeight * 0.34, 260);
   let activeId = sections[0]?.id;
 
   sections.forEach((section) => {
-    if (section.offsetTop <= marker) activeId = section.id;
+    if (section.getBoundingClientRect().top <= marker) activeId = section.id;
   });
 
   navLinks.forEach((link) => {
